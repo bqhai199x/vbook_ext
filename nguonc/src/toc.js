@@ -11,23 +11,16 @@ function execute(url) {
         let epOrder = [];
 
         episodes.forEach(function (server) {
-            let serverName = server.server_name || "Server";
             let items = server.items || [];
             items.forEach(function (item) {
                 let epKey = item.slug || item.name;
                 if (!epMap[epKey]) {
                     epMap[epKey] = {
                         name: item.name ? item.name.toString() : "",
-                        slug: epKey,
-                        filmSlug: slug,
-                        servers: []
+                        slug: epKey
                     };
                     epOrder.push(epKey);
                 }
-                epMap[epKey].servers.push({
-                    title: serverName,
-                    data: item.embed
-                });
             });
         });
 
@@ -41,11 +34,7 @@ function execute(url) {
 
             chapters.push({
                 name: displayName,
-                url: JSON.stringify({
-                    filmSlug: ep.filmSlug,
-                    epSlug: ep.slug,
-                    servers: ep.servers
-                }),
+                url: BASE_URL + "/phim/" + slug + "/" + ep.slug,
                 host: BASE_URL
             });
         });

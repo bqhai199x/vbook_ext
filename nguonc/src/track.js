@@ -22,6 +22,14 @@ function resolveEmbedToStream(embed) {
 function execute(data) {
     if (!data) return Response.error("Không tìm thấy liên kết video");
 
+    let playerType = "auto";
+    try {
+        if (PLAYER_MODE) {
+            playerType = PLAYER_MODE;
+        }
+    } catch (e) {
+    }
+
     // 1. Nếu đã là direct link m3u8 hoặc mp4
     if (data.indexOf(".m3u8") !== -1 || data.indexOf(".mp4") !== -1) {
         return Response.success({
@@ -53,9 +61,9 @@ function execute(data) {
         });
     }
 
-    // 3. Fallback auto để vBook tự động bắt link stream qua sniffer/webview nội bộ
+    // 3. Sử dụng playerType (auto hoặc webview)
     return Response.success({
-        type: "auto",
+        type: playerType,
         data: data,
         host: BASE_URL,
         headers: {

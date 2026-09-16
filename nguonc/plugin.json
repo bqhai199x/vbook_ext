@@ -27,6 +27,17 @@
       "default": "https://phim.nguonc.com",
       "mode": "input",
       "format": "text"
+    },
+    "PLAYER_MODE": {
+      "title": "Chế độ phát",
+      "subtitle": "Chọn 'auto' (mặc định) hoặc 'webview' nếu máy không tự bắt link được",
+      "default": "auto",
+      "values": [
+        "auto",
+        "webview"
+      ],
+      "mode": "select",
+      "format": "single"
     }
   }
 }

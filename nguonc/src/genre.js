@@ -36,6 +36,17 @@ function execute() {
         { title: "Đài Loan", input: BASE_URL + "/api/films/quoc-gia/dai-loan", script: "gen.js" },
         { title: "Ấn Độ", input: BASE_URL + "/api/films/quoc-gia/an-do", script: "gen.js" },
         { title: "Anh", input: BASE_URL + "/api/films/quoc-gia/anh", script: "gen.js" },
-        { title: "Pháp", input: BASE_URL + "/api/films/quoc-gia/phap", script: "gen.js" }
+        { title: "Pháp", input: BASE_URL + "/api/films/quoc-gia/phap", script: "gen.js" },
+
+        // Năm phát hành (theo tài liệu api /api/films/nam-phat-hanh/{year})
+        { title: "Năm 2026", input: BASE_URL + "/api/films/nam-phat-hanh/2026", script: "gen.js" },
+        { title: "Năm 2025", input: BASE_URL + "/api/films/nam-phat-hanh/2025", script: "gen.js" },
+        { title: "Năm 2024", input: BASE_URL + "/api/films/nam-phat-hanh/2024", script: "gen.js" },
+        { title: "Năm 2023", input: BASE_URL + "/api/films/nam-phat-hanh/2023", script: "gen.js" },
+        { title: "Năm 2022", input: BASE_URL + "/api/films/nam-phat-hanh/2022", script: "gen.js" },
+        { title: "Năm 2021", input: BASE_URL + "/api/films/nam-phat-hanh/2021", script: "gen.js" },
+        { title: "Năm 2020", input: BASE_URL + "/api/films/nam-phat-hanh/2020", script: "gen.js" },
+        { title: "Năm 2019", input: BASE_URL + "/api/films/nam-phat-hanh/2019", script: "gen.js" },
+        { title: "Năm 2018", input: BASE_URL + "/api/films/nam-phat-hanh/2018", script: "gen.js" }
     ]);
 }
