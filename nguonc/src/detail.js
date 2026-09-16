@@ -1,6 +1,7 @@
 load('config.js');
 
 function execute(url) {
+    url = normalizeUrl(url);
     let slug = url.replace(/\/+$/, "").split("/").pop();
     let json = getJson(BASE_URL + "/api/film/" + slug);
 

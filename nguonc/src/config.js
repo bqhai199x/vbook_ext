@@ -1,9 +1,15 @@
 let BASE_URL = "https://phim.nguonc.com";
 try {
-    if (CONFIG_URL) {
+    if (DOMAIN) {
+        BASE_URL = DOMAIN;
+    } else if (CONFIG_URL) {
         BASE_URL = CONFIG_URL;
     }
 } catch (error) {
+}
+
+function normalizeUrl(url) {
+    return url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
 }
 
 function getJson(url) {

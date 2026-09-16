@@ -1,28 +1,52 @@
 load('config.js');
 
 function execute(url) {
+    url = normalizeUrl(url);
     let slug = url.replace(/\/+$/, "").split("/").pop();
     let json = getJson(BASE_URL + "/api/film/" + slug);
 
     if (json && json.status === "success" && json.movie && json.movie.episodes) {
         let episodes = json.movie.episodes;
-        let chapters = [];
-        let multiServers = episodes.length > 1;
+        let epMap = {};
+        let epOrder = [];
 
-        episodes.forEach(server => {
+        episodes.forEach(function (server) {
             let serverName = server.server_name || "Server";
             let items = server.items || [];
-            items.forEach(item => {
-                let epName = item.name ? item.name.toString() : "";
-                if (epName.toLowerCase().indexOf("tập") === -1 && epName.toLowerCase().indexOf("full") === -1) {
-                    epName = "Tập " + epName;
+            items.forEach(function (item) {
+                let epKey = item.slug || item.name;
+                if (!epMap[epKey]) {
+                    epMap[epKey] = {
+                        name: item.name ? item.name.toString() : "",
+                        slug: epKey,
+                        filmSlug: slug,
+                        servers: []
+                    };
+                    epOrder.push(epKey);
                 }
-                let displayName = multiServers ? ("[" + serverName + "] " + epName) : epName;
-                chapters.push({
-                    name: displayName,
-                    url: item.embed,
-                    host: BASE_URL
+                epMap[epKey].servers.push({
+                    title: serverName,
+                    data: item.embed
                 });
+            });
+        });
+
+        let chapters = [];
+        epOrder.forEach(function (epKey) {
+            let ep = epMap[epKey];
+            let displayName = ep.name;
+            if (displayName.toLowerCase().indexOf("tập") === -1 && displayName.toLowerCase().indexOf("full") === -1) {
+                displayName = "Tập " + displayName;
+            }
+
+            chapters.push({
+                name: displayName,
+                url: JSON.stringify({
+                    filmSlug: ep.filmSlug,
+                    epSlug: ep.slug,
+                    servers: ep.servers
+                }),
+                host: BASE_URL
             });
         });
 

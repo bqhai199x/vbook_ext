@@ -2,12 +2,13 @@
   "metadata": {
     "name": "NguonC",
     "author": "vBook",
-    "version": 1,
+    "version": 2,
     "source": "https://phim.nguonc.com",
     "regexp": "(www.)?phim\\.nguonc\\.com/.*",
     "description": "Xem phim trực tuyến chất lượng cao từ NguonC (phim bộ, phim lẻ, hoạt hình, TV shows)",
     "locale": "vi_VN",
     "type": "video",
+    "format": "series",
     "language": "javascript"
   },
   "script": {
@@ -16,10 +17,11 @@
     "search": "search.js",
     "detail": "detail.js",
     "toc": "toc.js",
+    "chap": "chap.js",
     "track": "track.js"
   },
   "config": {
-    "CONFIG_URL": {
+    "DOMAIN": {
       "title": "Tên miền",
       "subtitle": "Tên miền máy chủ NguonC",
       "default": "https://phim.nguonc.com",
